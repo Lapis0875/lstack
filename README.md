@@ -28,7 +28,7 @@ npx skills add cathrynlavery/diagram-design
 npx skills add epoko77-ai/im-not-ai --skill humanize-korean
 npx skills add jakubkrehel/make-interfaces-feel-better
 npx skills add Nutlope/hallmark
-npx skills add pbakaus/impeccable
+npx skills add wheresryan22/anatomy
 npx skills add nextlevelbuilder/ui-ux-pro-max-skill
 ```
 
@@ -48,7 +48,7 @@ npx skills add nextlevelbuilder/ui-ux-pro-max-skill
 | `humanize-korean` | 긴 한국어 산문의 AI 티 제거, 변경률 측정·정량 게이트 포함 | [epoko77-ai/im-not-ai](https://github.com/epoko77-ai/im-not-ai) → `codex/skills/humanize-korean` | 원저장소 참조 |
 | `make-interfaces-feel-better` | 애니메이션·타이포그래피·아이콘·hover 등 UI 디테일 개선 | [jakubkrehel/make-interfaces-feel-better](https://github.com/jakubkrehel/make-interfaces-feel-better) | MIT |
 | `hallmark` | Anti-AI-slop 디자인: 새 페이지/앱 빌드, `audit`, `redesign`, URL·스크린샷에서 디자인 DNA 추출(`study`) | [Nutlope/hallmark](https://github.com/Nutlope/hallmark) · https://usehallmark.com | MIT |
-| `impeccable` | 프론트엔드 디자인 어휘·안티패턴 모음: `polish`, `bolder`, `critique`, `audit`, `animate`, `document`(DESIGN.md 생성) 등 23개 커맨드 | [pbakaus/impeccable](https://github.com/pbakaus/impeccable) · https://impeccable.style | Apache-2.0 |
+| `anatomy` | 기계·시스템을 설명하는 상세 인터랙티브 아이소메트릭 SVG 일러스트 생성 (선택적 WebGL·3D 효과), 문서·랜딩·인터랙티브 설명용 | [wheresryan22/anatomy](https://github.com/wheresryan22/anatomy) | MIT |
 | `ui-ux-pro-max` | 웹·모바일·데스크톱 UI/UX 설계 인텔리전스: 제품·플랫폼별 UX 가이드, 접근성, 반응형, 타이포·컬러, 스택별 구현 권고 | [nextlevelbuilder/ui-ux-pro-max-skill](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill) | MIT |
 
 ## 디자인 레퍼런스
