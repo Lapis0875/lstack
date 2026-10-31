@@ -45,7 +45,90 @@ npx skills add jakubkrehel/make-interfaces-feel-better
 | `humanize-korean` | 긴 한국어 산문의 AI 티 제거, 변경률 측정·정량 게이트 포함 | [epoko77-ai/im-not-ai](https://github.com/epoko77-ai/im-not-ai) → `codex/skills/humanize-korean` | 원저장소 참조 |
 | `make-interfaces-feel-better` | 애니메이션·타이포그래피·아이콘·hover 등 UI 디테일 개선 | [jakubkrehel/make-interfaces-feel-better](https://github.com/jakubkrehel/make-interfaces-feel-better) | MIT |
 
+## 디자인 레퍼런스
+
+omp `ui-designer` 에이전트 정의의 "Design references" 섹션을 그대로 옮긴 것. 작업 순서는 레이아웃/플로우 → 토큰 → 컴포넌트 → 모션이며, 브리프·브랜드 가이드·기존 `DESIGN.md`·프로젝트 디자인 시스템이 항상 레퍼런스보다 우선한다. 제품 유형과 무드에 맞는 사이트를 2~3개만 고른다.
+
+열 의미: **Page** = 전체 페이지/플로우, **Comp** = 컴포넌트/섹션, **Brand** = 브랜드 시스템·아이덴티티·에셋, **Anti-slop** = 에이전트에 AI 티 나는 결과물을 막는 구체적 규칙·토큰·감사 제공.
+
+출처: https://www.threads.com/@escape.salary/post/DeJPtzAE-2E, https://subsequent-paw-3ac.notion.site/AI-17-3ecced0d5b0280fc91f2f09252dd50bb (Ellie Co. Studio), Instagram 게시물 DdwvHWVG5z9, DdbxUiqk-MZ, DeQ5WKekcqs, DePQQZrjPJW, DdveM-dDrFx, Dd35hA1k8s8, Ddqj0svm6yq, DePBMFZiGkO, Ddc429ck7PO, DdgwETfDMOT (`https://www.instagram.com/p/<id>/`).
+
+### 전체 페이지·플로우
+| Site | URL | Page | Comp | Brand | Anti-slop | Tags |
+|---|---|---|---|---|---|---|
+| Mobbin | https://mobbin.com | ✓ | ✓ | | | shipped app/web screens, end-to-end flows, UI patterns |
+| Refero | https://refero.design | ✓ | | | | web/iOS screens and flows searchable by purpose |
+| Minimal Gallery | https://minimal.gallery | ✓ | | | | minimal, premium; whitespace and type rhythm |
+| Land-book | https://land-book.com | ✓ | ✓ | | | landings; sections, mobile, OG images |
+| One Page Love | https://onepagelove.com | ✓ | ✓ | | | single-page sites; section examples |
+| Awwwards | https://www.awwwards.com | ✓ | | | | jury-picked art direction, interaction, motion; check usability separately |
+| Godly | https://godly.design | ✓ | | | | cutting-edge sites; screenshot as layout target |
+| Curated | https://curated.design | ✓ | | | | live sites by industry and style |
+| Site of Sites | https://siteofsites.co | ✓ | | | | ~600 sites; industry/style/platform filters |
+| Dark Design | https://dark.design | ✓ | | | | dark UI by industry |
+| Dark Mode Design | https://darkmodedesign.com | ✓ | | | | dark UI accents and type sizes |
+| 3D Websites | https://3dwebsites.design | ✓ | | | | 3D web |
+| Internet Gems | https://ilovecreatives.com/internet-gems | ✓ | | ✓ | | websites, emails, 3D |
+| Pafolios | https://pafolios.com | ✓ | | | | portfolios, case studies |
+
+### 컴포넌트·모션
+| Site | URL | Page | Comp | Brand | Anti-slop | Tags |
+|---|---|---|---|---|---|---|
+| shadcn/ui | https://ui.shadcn.com | | ✓ | | | React/Tailwind primitives copied as owned source |
+| Component Gallery | https://component.gallery | | ✓ | | | anatomy, naming, states across design systems; any stack |
+| 21st.dev | https://21st.dev | | ✓ | | | 12,000+ React/shadcn blocks, templates, themes |
+| Craftwork | https://craftwork.design | ✓ | ✓ | | | website gallery, UI kits, assets |
+| Three UI | https://threeui.com | ✓ | ✓ | | | Three.js landings, heroes, shaders |
+| The Design Stack | https://thedesignstack.co.in | | ✓ | | | Figma components, interaction prompts |
+| Unlumen UI | https://ui.unlumen.com | | ✓ | | | motion components |
+| Balsa | https://balsa-ui.com | | ✓ | | | design system → agent-usable component registry |
+| App Motion | https://appmotion.design | | ✓ | | | mobile app motion patterns |
+| Aceternity UI | https://ui.aceternity.com | | ✓ | | | motion; bold heroes, background effects |
+| Magic UI | https://magicui.design | | ✓ | | | motion; SaaS landing details (ticker, marquee, globe) |
+| Motion Primitives | https://motion-primitives.com | | ✓ | | | motion; restrained product-UI polish |
+| transitions.dev | https://transitions.dev | | ✓ | | ✓ | motion; copy-paste transitions plus agent skill |
+| Anime.js | https://animejs.com | | | | | motion library; framework-agnostic timelines, SVG |
+| Springs Studio | https://springs.studio | | | | | motion tokens (easings) previewed on real UI |
+| Animos | https://animos.app | | | | | motion; design showcase/launch video export |
+
+### 브랜드 시스템·타이포·에셋
+| Site | URL | Page | Comp | Brand | Anti-slop | Tags |
+|---|---|---|---|---|---|---|
+| Refero Styles | https://styles.refero.design | | | ✓ | ✓ | 2,000+ real products' color/type/spacing; DESIGN.md download |
+| DESIGNmd | https://designmd.ai | | | | ✓ | community DESIGN.md systems when no brand exists |
+| getdesign.md / Awesome DESIGN.md | https://getdesign.md, https://github.com/VoltAgent/awesome-design-md | ✓ | | ✓ | ✓ | big-brand DESIGN.md token files |
+| deck.gallery | https://deck.gallery | | | ✓ | | real pitch decks, brand guideline decks |
+| Meshfont | https://meshfont.com | | | ✓ | | type; custom font in browser |
+| Tegaki | https://gkurt.com/tegaki | | | | | type, motion; stroke-by-stroke handwriting animation |
+| Endless Tools | https://endlesstools.io | | | ✓ | | 3D assets, brand visuals |
+| Morflax Studio | https://studio.morflax.com | | | ✓ | | 3D mockups, motion assets |
+| Creatoom | https://creatoom.com | | | ✓ | | packaging and device mockups |
+| Iconly Pro | https://iconly.pro | | | | | icons (flat, 3D, animated) |
+
+### Anti-AI-slop 규칙·에이전트 도구
+| Site | URL | Page | Comp | Brand | Anti-slop | Tags |
+|---|---|---|---|---|---|---|
+| Taste Skill | https://tasteskill.dev | | | | ✓ | 역할은 `hallmark`로 대체 |
+| Design Skills | https://designskills.dev | | | | ✓ | 230+ 스타일별 스킬 카탈로그 |
+| Hallmark | https://usehallmark.com | | | | ✓ | `hallmark` 스킬: build, audit, redesign, study |
+| Anti Slop | https://github.com/miqdadbadjuber/anti-slop | | | | ✓ | 역할은 `hallmark`로 대체 |
+| Vercel Web Interface Guidelines | https://vercel.com/design/guidelines | | | | ✓ | 접근성·폼·모션·타이포 규칙 (MIT, https://github.com/vercel-labs/web-interface-guidelines) |
+| Playwright CLI | https://github.com/microsoft/playwright-cli | | | | | agent browser QA |
+| agent-browser | https://github.com/vercel-labs/agent-browser | | | | | agent browser QA |
+| A/B Test | https://abtest.design | | | | | UX data; app A/B test results (Mobbin) |
+
+### 사용 규칙
+- 페이지: 앱/웹 제품은 Mobbin·Refero 플로우부터. 첫 화면이 아니라 플로우 전체를 비교하고, 데스크톱·모바일 전체 페이지 스크린샷에서 섹션 순서·그리드·최대 폭·여백·타입 스케일·이미지 처리·nav/footer를 추출해 레이아웃 목표로 삼는다.
+- 토큰: 새 비주얼 방향은 2~3개 후보를 제시한다. 선택된 DESIGN.md는 프로젝트 루트 `DESIGN.md`로 저장(기존 파일은 허가 없이 덮어쓰지 않음)하고 컴포넌트 리터럴이 아니라 토큰 레이어에 매핑한다.
+- 컴포넌트: 프로젝트 컴포넌트 재사용 우선. 구조·상태가 불분명하면 `https://component.gallery/components/<name>/`. React+Tailwind면 shadcn/ui(`npx shadcn@latest add <component>`, 기존 프로젝트는 `--dry-run` 먼저), 마케팅 블록은 21st.dev. 다른 스택은 구조·상태만 이식하고 React/Tailwind를 추가하지 않는다.
+- 모션: 기존 애니메이션 라이브러리가 있으면 그것만 쓴다. 과감한 히어로 → Aceternity(`npx shadcn@latest add @aceternity/<component>`), SaaS 디테일 → Magic UI(`@magicui/<component>`), 절제된 제품 폴리시 → Motion Primitives(`npx motion-primitives@latest add <component>`), 비-React/커스텀 타임라인 → Anime.js. 뷰당 시그니처 효과 하나, `transform`/`opacity`만 애니메이션, `prefers-reduced-motion` 존중.
+- 구조·리듬·토큰만 빌린다. 콘텐츠·로고·브랜드 에셋·이미지·소스를 그대로 복사하지 않으며, 폰트·아이콘·목업·3D 에셋은 다운로드 전 라이선스를 확인한다.
+
 ## 의도적으로 제외한 것
 
 - `figma-*` 14종 — Codex에서는 공식 Figma 플러그인(`openai-curated/figma`)이 동일 스킬을 제공한다.
 - omp 전용 서브에이전트(`ui-designer`, `slide-designer`)에 의존하는 스킬 — 다른 환경에서 그대로 동작하지 않아 제외.
+
+## 라이선스
+
+`skills/` 아래 직접 작성한 스킬과 이 README는 [MIT](LICENSE). 외부 스킬은 각 원저장소의 라이선스를 따른다.
