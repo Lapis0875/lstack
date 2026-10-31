@@ -27,6 +27,8 @@ npx skills add mattpocock/skills --skill grilling
 npx skills add cathrynlavery/diagram-design
 npx skills add epoko77-ai/im-not-ai --skill humanize-korean
 npx skills add jakubkrehel/make-interfaces-feel-better
+npx skills add Nutlope/hallmark
+npx skills add pbakaus/impeccable
 ```
 
 ## 포함 스킬 (`skills/`)
@@ -44,6 +46,8 @@ npx skills add jakubkrehel/make-interfaces-feel-better
 | `diagram-design` | 아키텍처·플로우·ERD·차트 등 다이어그램을 HTML/SVG/PNG로 생성 | [cathrynlavery/diagram-design](https://github.com/cathrynlavery/diagram-design) | MIT |
 | `humanize-korean` | 긴 한국어 산문의 AI 티 제거, 변경률 측정·정량 게이트 포함 | [epoko77-ai/im-not-ai](https://github.com/epoko77-ai/im-not-ai) → `codex/skills/humanize-korean` | 원저장소 참조 |
 | `make-interfaces-feel-better` | 애니메이션·타이포그래피·아이콘·hover 등 UI 디테일 개선 | [jakubkrehel/make-interfaces-feel-better](https://github.com/jakubkrehel/make-interfaces-feel-better) | MIT |
+| `hallmark` | Anti-AI-slop 디자인: 새 페이지/앱 빌드, `audit`, `redesign`, URL·스크린샷에서 디자인 DNA 추출(`study`) | [Nutlope/hallmark](https://github.com/Nutlope/hallmark) · https://usehallmark.com | MIT |
+| `impeccable` | 프론트엔드 디자인 어휘·안티패턴 모음: `polish`, `bolder`, `critique`, `audit`, `animate`, `document`(DESIGN.md 생성) 등 23개 커맨드 | [pbakaus/impeccable](https://github.com/pbakaus/impeccable) · https://impeccable.style | Apache-2.0 |
 
 ## 디자인 레퍼런스
 
