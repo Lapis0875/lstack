@@ -38,6 +38,7 @@ npx skills add nextlevelbuilder/ui-ux-pro-max-skill
 |---|---|---|
 | `make-it-like-korean` | 한국어 실무 문서·UI 문구의 번역투·AI 관용구 제거, 원문 문체 유지 | — |
 | `idea-validation` | 프로젝트·캡스톤 아이디어 검증: grill 질문, 시장·경쟁 조사, MVP 범위, 레드팀 | `grilling` |
+| `hackathon-plan` | 문제가 정해진 해커톤에서 30분 안에 API 계약·워커 브리프를 쓰고 3시간 Orchestrator/BE/FE/Reviewer 빌드를 돌리는 절차. `hackathon-be-spring`·`hackathon-fe-vite` 보일러플레이트 전제 | — |
 
 ## 외부 스킬
 
