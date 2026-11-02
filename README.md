@@ -30,6 +30,10 @@ npx skills add jakubkrehel/make-interfaces-feel-better
 npx skills add Nutlope/hallmark
 npx skills add wheresryan22/anatomy
 npx skills add nextlevelbuilder/ui-ux-pro-max-skill
+npx skills add Jakeschincariol/replica-skill
+npx skills add lucasmarkes/hairline
+npx skills add assafkip/claudemy
+npx rea-agents@latest setup   # REA: MCP 서버 등록 + reverse-engineer-anything 스킬 설치 (Node 22.23.4+ / 24.22.1+ / 26.12.1+)
 ```
 
 ## 포함 스킬 (`skills/`)
@@ -39,6 +43,7 @@ npx skills add nextlevelbuilder/ui-ux-pro-max-skill
 | `make-it-like-korean` | 한국어 실무 문서·UI 문구의 번역투·AI 관용구 제거, 원문 문체 유지 | — |
 | `idea-validation` | 프로젝트·캡스톤 아이디어 검증: grill 질문, 시장·경쟁 조사, MVP 범위, 레드팀 | `grilling` |
 | `hackathon-plan` | 문제가 정해진 해커톤에서 30분 안에 API 계약·워커 브리프를 쓰고 3시간 Orchestrator/BE/FE/Reviewer 빌드를 돌리는 절차. `hackathon-be-spring`·`hackathon-fe-vite` 보일러플레이트 전제 | — |
+| `openai-dev-team` | OpenAI 모델만 쓰는 에이전트 개발 팀: Orchestrator(GPT-6 Astra, 대체 Sol high)·Implementer(GPT-6.1 Terra, 대체 Sol medium, 테스트 코드까지 작성)·Reviewer(GPT-6.1 Sol high)·Tester(GPT-6 Luna medium, 테스트 직접 수행) | — |
 
 ## 외부 스킬
 
@@ -51,6 +56,11 @@ npx skills add nextlevelbuilder/ui-ux-pro-max-skill
 | `hallmark` | Anti-AI-slop 디자인: 새 페이지/앱 빌드, `audit`, `redesign`, URL·스크린샷에서 디자인 DNA 추출(`study`) | [Nutlope/hallmark](https://github.com/Nutlope/hallmark) · https://usehallmark.com | MIT |
 | `anatomy` | 기계·시스템을 설명하는 상세 인터랙티브 아이소메트릭 SVG 일러스트 생성 (선택적 WebGL·3D 효과), 문서·랜딩·인터랙티브 설명용 | [wheresryan22/anatomy](https://github.com/wheresryan22/anatomy) | MIT |
 | `ui-ux-pro-max` | 웹·모바일·데스크톱 UI/UX 설계 인텔리전스: 제품·플랫폼별 UX 가이드, 접근성, 반응형, 타이포·컬러, 스택별 구현 권고 | [nextlevelbuilder/ui-ux-pro-max-skill](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill) | MIT |
+| `reverse-engineer-anything` | REA MCP 도구로 네이티브 바이너리·Electron/JS·.NET·Android·웹사이트의 기능 동작을 근거와 함께 분석·설명·재구성. 스킬 단독으로는 동작하지 않고 `npx rea-agents setup`이 MCP 서버(`~/.omp/agent/mcp.json` 등)와 스킬을 함께 설치 | [morluto/rea](https://github.com/morluto/rea) → `.agents/skills/reverse-engineer-anything` · https://rea.tools | MIT |
+| `replica-*` (11종) | 앱 클론 파이프라인: `recon`(공개 정보로 화면·플로우·데이터 모델 리콘) → `architect` → `design` → `build` → `backend` → `test` → `diff`(원본 대비 패리티 점수) → `entrepreneur`(실제 리뷰 기반 개선점) → `brand`(리브랜딩·잔재 스윕) → `launch` → `deploy`. 기능·UX만 클린룸으로 재구현, 코드·에셋·카피 복제 금지. 도구는 Python 3.8+ 표준 라이브러리만 사용 | [Jakeschincariol/replica-skill](https://github.com/Jakeschincariol/replica-skill) | MIT |
+| `hairline-create` | 아이디어 하나로 포인터에 반응하는 아이소메트릭 라인 피겨를 의존성 없는 단일 HTML로 생성. `@lucasmarkes/hairline` 엔진 위에서 10가지 규칙 검증 + 브라우저 체크 | [lucasmarkes/hairline](https://github.com/lucasmarkes/hairline) → `skills/hairline-create` · https://hairline.lucasmarkes.com | MIT |
+| `hairline-adopt` | 기존 SVG(아이콘·로고·일러스트)를 읽어 비례·부품을 유지한 Hairline 피겨로 재구성하고 포인터 제스처를 제안 | [lucasmarkes/hairline](https://github.com/lucasmarkes/hairline) → `skills/hairline-adopt` | MIT |
+| `claudemy` | 주제를 웹 리서치해 2분짜리 2인 대화형 오디오 레슨 약 12개 코스로 생성(레슨 카드·플레이북·인용 검증 포함). Python 3 + `beautifulsoup4`, `ffmpeg` 필요. 음성은 ElevenLabs(`ELEVENLABS_API_KEY`) 또는 macOS 내장 음성 | [assafkip/claudemy](https://github.com/assafkip/claudemy) → `skills/claudemy` | MIT |
 
 ## 디자인 레퍼런스
 
