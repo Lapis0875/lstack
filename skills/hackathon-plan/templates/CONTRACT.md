@@ -5,6 +5,13 @@ Conventions (from the boilerplates, do not restate per endpoint):
 - Errors: RFC 9457 `application/problem+json` `{type,title,status,detail,instance}`; validation 400 adds `errors[{field,message}]`.
 - DTO names end in `Request` / `Response`; FE types are generated from `/v3/api-docs`, so names here are binding.
 - Existing: `POST /api/auth/signup`, `POST /api/auth/login`, `GET /api/me`, `User{id,email,passwordHash}`.
+- Official docs: each repo's `docs/refs/INDEX.md` (Context7 snapshots pinned to the project's versions).
+
+## References
+| Feature | Library / topic | Source (`docs/refs/…` or Context7 ID) | Project version |
+| --- | --- | --- | --- |
+| Todo list | Spring Data JPA query methods | `hackathon-be-spring/docs/refs/spring-data-jpa/query-methods.md` | 4.1.2 |
+| Todo list | TanStack Query mutations | `hackathon-fe-vite/docs/refs/tanstack-query/queries-mutations.md` | 5.90.3 |
 
 ## Entities (new)
 | Entity | Fields |

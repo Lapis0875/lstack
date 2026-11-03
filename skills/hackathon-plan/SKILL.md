@@ -60,6 +60,7 @@ Rules that keep this to 10 minutes:
 - One list endpoint + one create endpoint per Must feature is usually enough. Add update/delete only if on the demo path.
 - No pagination, no filtering, no file upload unless on the demo path.
 - Name the DTO classes; the BE's springdoc output and the FE's generated types must match these names.
+- Fill the contract's `## References` table from each boilerplate's `docs/refs/INDEX.md`: one row per library a Must feature touches (for example Spring Batch for a CSV import, AWS S3 for uploads). Copy the file path and pinned Context7 ID; do not research during the timebox.
 
 ### 15–20 min: screen ↔ endpoint map
 Fill the table in `plan/SCOPE.md`: one row per screen (3–5 screens), listing
@@ -74,7 +75,11 @@ Fill `templates/BRIEF-backend.md` and `templates/BRIEF-frontend.md` into
 which is mostly the contract turned into a checklist.
 
 Do not write implementation steps, folder layouts, or component trees in the
-briefs. Implementers decide those.
+briefs. Implementers decide those. Briefs do point implementers at
+`docs/refs/` and the contract's References table.
+
+For non-contest work, `plan-loop` runs the same contract-first planning with a
+single plan file and a run loop that drives it to completion.
 
 ### 27–30 min: dispatch
 Dispatch BE and FE in the same batch. First assignment for both is the

@@ -11,6 +11,7 @@ Implement every screen in `plan/SCOPE.md` "Screens ↔ endpoints" using `plan/CO
 2. Walking skeleton: the first demo-path screen against the real API (`pnpm gen:api` once BE serves `/v3/api-docs`). Report when it runs.
 3. Then the remaining screens, demo-path order.
 - Use the existing patterns: `src/api/client.ts` (openapi-fetch), TanStack Query hooks per resource, react-hook-form + zod for forms, shadcn components.
+- Before using a library API, read its file under `docs/refs/` (see `docs/refs/INDEX.md` and the contract's References). Dependencies are pinned to the documented versions; do not bump them during the event.
 - Show server ProblemDetail `detail` / `errors` on failures.
 - Contract gap → message the Orchestrator; do not invent fields.
 

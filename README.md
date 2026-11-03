@@ -3,6 +3,8 @@
 Lapis0875의 에이전트 스킬 스택. omp에서 쓰던 스킬셋을 Codex 등 다른 환경(원격 PC 포함)에서 동일하게 재현하기 위한 저장소다.
 
 - `skills/` — 직접 작성한 스킬 (이 저장소에 포함)
+- `codex/` — Codex 전용 보조 자산 (hook 등). 스킬과 달리 `npx skills add`로 설치되지 않는다
+- `profiles/` — 외부 스킬용 개인 설정 (예: `diagram-design` 스타일 프로필). 스킬 본문은 포함하지 않는다
 - 아래 **외부 스킬** 표 — 서드파티 스킬의 출처와 설치 명령 (본문은 각 원저장소에서 받는다)
 
 ## 설치
@@ -18,6 +20,13 @@ npx skills add Lapis0875/lstack
 ```bash
 git clone https://github.com/Lapis0875/lstack.git
 ln -s "$PWD/lstack/skills/"* ~/.agents/skills/
+```
+
+`plan-loop`의 Codex hook(계획 단계 읽기 전용 강제, 미완료 작업이 있으면 멈춤 차단)은 선택 사항이다. 체크아웃한 저장소에서 실행한다:
+
+```bash
+python3 codex/plan-loop/install.py          # 변경 예정 내용만 출력
+python3 codex/plan-loop/install.py --apply  # ~/.codex/hooks.json 백업 후 핸들러 추가
 ```
 
 ### 2. 외부 스킬
@@ -36,6 +45,21 @@ npx skills add assafkip/claudemy
 npx rea-agents@latest setup   # REA: MCP 서버 등록 + reverse-engineer-anything 스킬 설치 (Node 22.23.4+ / 24.22.1+ / 26.12.1+)
 ```
 
+### 3. 외부 스킬 설정 (`profiles/`)
+
+`diagram-design` 스타일 프로필은 `~/.diagram-design/profiles/`에 두면 스킬 업데이트와 무관하게 유지된다. 프로젝트에서 쓰려면 프로젝트 루트에 `.diagram-design` 파일(`profile: <slug>` 한 줄)을 만든다.
+
+```bash
+mkdir -p ~/.diagram-design/profiles
+cp lstack/profiles/diagram-design/*.md ~/.diagram-design/profiles/
+echo "profile: ax-study" > <project-root>/.diagram-design   # 또는 nypc
+```
+
+| 프로필 | 스킨 | 출처 |
+|---|---|---|
+| `ax-study` | Paper & Ink: 따뜻한 종이색, 차콜 잉크, 크림슨 강조 1색. Noto Serif KR / Noto Sans KR / DM Mono | AX Study 발표 자료 `DESIGN.md` 토큰 |
+| `nypc` | NYPC 사이트 팔레트: CTA 빨강 강조, CTA 파랑 링크 | https://www.nypc.co.kr |
+
 ## 포함 스킬 (`skills/`)
 
 | 스킬 | 용도 | 의존 |
@@ -44,6 +68,7 @@ npx rea-agents@latest setup   # REA: MCP 서버 등록 + reverse-engineer-anythi
 | `idea-validation` | 프로젝트·캡스톤 아이디어 검증: grill 질문, 시장·경쟁 조사, MVP 범위, 레드팀 | `grilling` |
 | `hackathon-plan` | 문제가 정해진 해커톤에서 30분 안에 API 계약·워커 브리프를 쓰고 3시간 Orchestrator/BE/FE/Reviewer 빌드를 돌리는 절차. `hackathon-be-spring`·`hackathon-fe-vite` 보일러플레이트 전제 | — |
 | `openai-dev-team` | OpenAI 모델만 쓰는 에이전트 개발 팀: Orchestrator(GPT-6 Astra, 대체 Sol high)·Implementer(GPT-6.1 Terra, 대체 Sol medium, 테스트 코드까지 작성)·Reviewer(GPT-6.1 Sol high)·Tester(GPT-6 Luna medium, 테스트 직접 수행) | — |
+| `plan-loop` | omp의 plan mode·todo·goal 루프를 옮긴 계획→실행 하네스. `plan` 모드는 읽기 전용 조사 후 `plan/<slug>.md`를 쓰고 승인을 기다리며, References 칸은 저장소의 Context7 참조 팩(`docs/refs/`)에서 버전이 맞는 문서를 고정한다. `run` 모드는 작업별 검증·증거 기록과 최종 스모크까지 이어서 실행. Codex hook 선택 설치(`codex/plan-loop/`) | — |
 
 ## 외부 스킬
 

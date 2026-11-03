@@ -10,6 +10,7 @@ Implement every endpoint and entity in `plan/CONTRACT.md`, in demo-path order:
 1. Walking skeleton first: `<entity>` + `GET/POST /api/<...>` with JPA + one MockMvc test. Report when it runs.
 2. Then the rest of the contract.
 - Follow the boilerplate's package layout (`auth/`, `user/`, `security/`, `common/`); add one package per entity.
+- Before using a library API, read its file under `docs/refs/` (see `docs/refs/INDEX.md` and the contract's References). Missing topic → query Context7 with the pinned ID from `INDEX.md`.
 - Ownership: every list/update/delete is scoped to the authenticated user.
 - Keep DTO names exactly as in the contract (springdoc schema names feed the FE).
 - Contract gap or impossibility → message the Orchestrator; do not improvise fields.
