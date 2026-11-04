@@ -42,6 +42,7 @@ npx skills add nextlevelbuilder/ui-ux-pro-max-skill
 npx skills add Jakeschincariol/replica-skill
 npx skills add lucasmarkes/hairline
 npx skills add assafkip/claudemy
+npx skills add benjitaylor/skills --skill stageshow
 npx rea-agents@latest setup   # REA: MCP 서버 등록 + reverse-engineer-anything 스킬 설치 (Node 22.23.4+ / 24.22.1+ / 26.12.1+)
 ```
 
@@ -86,6 +87,7 @@ echo "profile: ax-study" > <project-root>/.diagram-design   # 또는 nypc
 | `hairline-create` | 아이디어 하나로 포인터에 반응하는 아이소메트릭 라인 피겨를 의존성 없는 단일 HTML로 생성. `@lucasmarkes/hairline` 엔진 위에서 10가지 규칙 검증 + 브라우저 체크 | [lucasmarkes/hairline](https://github.com/lucasmarkes/hairline) → `skills/hairline-create` · https://hairline.lucasmarkes.com | MIT |
 | `hairline-adopt` | 기존 SVG(아이콘·로고·일러스트)를 읽어 비례·부품을 유지한 Hairline 피겨로 재구성하고 포인터 제스처를 제안 | [lucasmarkes/hairline](https://github.com/lucasmarkes/hairline) → `skills/hairline-adopt` | MIT |
 | `claudemy` | 주제를 웹 리서치해 2분짜리 2인 대화형 오디오 레슨 약 12개 코스로 생성(레슨 카드·플레이북·인용 검증 포함). Python 3 + `beautifulsoup4`, `ffmpeg` 필요. 음성은 ElevenLabs(`ELEVENLABS_API_KEY`) 또는 macOS 내장 음성 | [assafkip/claudemy](https://github.com/assafkip/claudemy) → `skills/claudemy` | MIT |
+| `stageshow` | 실제 제품처럼 보이는 faux UI(앱·브라우저 창, 폰, 대시보드, 벤토 카드)와 커서 워크스루 애니메이션을 React·CSS로 제작. 랜딩 히어로·기능 카드·문서용. `kit/`(React 18+, 애니메이션 런타임 의존 없음)과 `examples/` 포함. omp `ui-designer`가 자동 로드 | [benjitaylor/skills](https://github.com/benjitaylor/skills) → `stageshow` | MIT |
 
 ## 디자인 레퍼런스
 
