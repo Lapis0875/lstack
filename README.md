@@ -43,7 +43,6 @@ npx skills add Jakeschincariol/replica-skill
 npx skills add lucasmarkes/hairline
 npx skills add assafkip/claudemy
 npx skills add benjitaylor/skills --skill stageshow
-npx rea-agents@latest setup   # REA: MCP 서버 등록 + reverse-engineer-anything 스킬 설치 (Node 22.23.4+ / 24.22.1+ / 26.12.1+)
 ```
 
 ### 3. 외부 스킬 설정 (`profiles/`)
@@ -82,7 +81,6 @@ echo "profile: ax-study" > <project-root>/.diagram-design   # 또는 nypc
 | `hallmark` | Anti-AI-slop 디자인: 새 페이지/앱 빌드, `audit`, `redesign`, URL·스크린샷에서 디자인 DNA 추출(`study`) | [Nutlope/hallmark](https://github.com/Nutlope/hallmark) · https://usehallmark.com | MIT |
 | `anatomy` | 기계·시스템을 설명하는 상세 인터랙티브 아이소메트릭 SVG 일러스트 생성 (선택적 WebGL·3D 효과), 문서·랜딩·인터랙티브 설명용 | [wheresryan22/anatomy](https://github.com/wheresryan22/anatomy) | MIT |
 | `ui-ux-pro-max` | 웹·모바일·데스크톱 UI/UX 설계 인텔리전스: 제품·플랫폼별 UX 가이드, 접근성, 반응형, 타이포·컬러, 스택별 구현 권고 | [nextlevelbuilder/ui-ux-pro-max-skill](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill) | MIT |
-| `reverse-engineer-anything` | REA MCP 도구로 네이티브 바이너리·Electron/JS·.NET·Android·웹사이트의 기능 동작을 근거와 함께 분석·설명·재구성. 스킬 단독으로는 동작하지 않고 `npx rea-agents setup`이 MCP 서버(`~/.omp/agent/mcp.json` 등)와 스킬을 함께 설치 | [morluto/rea](https://github.com/morluto/rea) → `.agents/skills/reverse-engineer-anything` · https://rea.tools | MIT |
 | `replica-*` (11종) | 앱 클론 파이프라인: `recon`(공개 정보로 화면·플로우·데이터 모델 리콘) → `architect` → `design` → `build` → `backend` → `test` → `diff`(원본 대비 패리티 점수) → `entrepreneur`(실제 리뷰 기반 개선점) → `brand`(리브랜딩·잔재 스윕) → `launch` → `deploy`. 기능·UX만 클린룸으로 재구현, 코드·에셋·카피 복제 금지. 도구는 Python 3.8+ 표준 라이브러리만 사용 | [Jakeschincariol/replica-skill](https://github.com/Jakeschincariol/replica-skill) | MIT |
 | `hairline-create` | 아이디어 하나로 포인터에 반응하는 아이소메트릭 라인 피겨를 의존성 없는 단일 HTML로 생성. `@lucasmarkes/hairline` 엔진 위에서 10가지 규칙 검증 + 브라우저 체크 | [lucasmarkes/hairline](https://github.com/lucasmarkes/hairline) → `skills/hairline-create` · https://hairline.lucasmarkes.com | MIT |
 | `hairline-adopt` | 기존 SVG(아이콘·로고·일러스트)를 읽어 비례·부품을 유지한 Hairline 피겨로 재구성하고 포인터 제스처를 제안 | [lucasmarkes/hairline](https://github.com/lucasmarkes/hairline) → `skills/hairline-adopt` | MIT |
