@@ -67,8 +67,8 @@ echo "profile: ax-study" > <project-root>/.diagram-design   # 또는 nypc
 |---|---|---|
 | `make-it-like-korean` | 한국어 실무 문서·UI 문구의 번역투·AI 관용구 제거, 원문 문체 유지 | — |
 | `idea-validation` | 프로젝트·캡스톤 아이디어 검증: grill 질문, 시장·경쟁 조사, MVP 범위, 레드팀 | `grilling` |
-| `hackathon-plan` | 문제가 정해진 해커톤에서 30분 안에 API 계약·워커 브리프를 쓰고 3시간 Orchestrator/BE/FE/Reviewer 빌드를 돌리는 절차. `hackathon-be-spring`·`hackathon-fe-vite` 보일러플레이트 전제 | — |
-| `openai-dev-team` | OpenAI 모델만 쓰는 에이전트 개발 팀: Orchestrator(GPT-6 Astra, 대체 Sol high)·Implementer(GPT-6.1 Terra, 대체 Sol medium, 테스트 코드까지 작성)·Reviewer(GPT-6.1 Sol high)·Tester(GPT-6 Luna medium, 테스트 직접 수행) | — |
+| `hackathon-plan` | 문제가 정해진 해커톤에서 30분 안에 API 계약·필수 인수 시나리오(`TEST-PLAN.md`)·워커 브리프를 작성. 설계 단계에서 요구사항별 사전조건·실행 절차·기대 결과를 고정하고 Implementer→Tester→Reviewer가 같은 기준으로 구현·실행·검토. `hackathon-be-spring`·`hackathon-fe-vite` 보일러플레이트 전제 | — |
+| `openai-dev-team` | OpenAI 모델만 쓰는 에이전트 개발 팀: Orchestrator(GPT-6 Astra, 대체 Sol high; architect 역할로 구현 전 필수 인수 시나리오 작성)·Implementer(GPT-6.1 Terra, 대체 Sol medium; 테스트 코드 작성)·Reviewer(GPT-6.1 Sol high)·Tester(GPT-6 Luna medium; 시나리오별 실행 증거 기록) | — |
 | `plan-loop` | omp의 plan mode·todo·goal 루프를 옮긴 계획→실행 하네스. `plan` 모드는 읽기 전용 조사 후 `plan/<slug>.md`를 쓰고 승인을 기다리며, References 칸은 저장소의 Context7 참조 팩(`docs/refs/`)에서 버전이 맞는 문서를 고정한다. `run` 모드는 작업별 검증·증거 기록과 최종 스모크까지 이어서 실행. Codex hook 선택 설치(`codex/plan-loop/`) | — |
 
 ## 외부 스킬

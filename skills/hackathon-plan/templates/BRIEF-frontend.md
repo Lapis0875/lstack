@@ -16,5 +16,7 @@ Implement every screen in `plan/SCOPE.md` "Screens ↔ endpoints" using `plan/CO
 - Contract gap → message the Orchestrator; do not invent fields.
 
 # Acceptance
+- Assigned mandatory scenarios: <AT-IDs> in `plan/TEST-PLAN.md`, written before implementation. Implement them and write behavioral tests from their expected outcomes; do not weaken expectations to fit the UI.
+- MSW is a development aid, not final integration evidence. The named Tester/verifier executes the required real-backend scenarios and records their IDs and outcomes; blocked or unrun is not done.
 - `pnpm typecheck`, `pnpm lint`, `pnpm test`, `pnpm build` green.
 - Demo path walked in a real browser against the real BE; URLs + visible text log + one screenshot in the report.

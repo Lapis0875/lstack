@@ -2,6 +2,13 @@
 
 Candidate: <BE commit/tree state> + <FE commit/tree state>
 
+## Prewritten product acceptance
+- [ ] `TEST-PLAN.md` was specified before implementation and every Must ID in SCOPE.md maps to a mandatory scenario.
+- [ ] Scenarios contain preconditions/data, actions, expected observable outcomes and data effects, verification methods, owners, and required evidence.
+- [ ] Happy paths and relevant failures, boundaries, authorization, and persistence are covered; inapplicable risk categories have reasons.
+- [ ] The named Tester/verifier executed every mandatory scenario on the stable candidate, using real integration where required, with per-ID PASS evidence.
+- [ ] No expectations were weakened to match the implementation. FAIL, BLOCKED, or NOT_RUN prevents completion; changes to scope/outcomes require explicit user approval.
+
 ## Contract conformance
 - [ ] Every endpoint in CONTRACT.md exists in `/v3/api-docs` with the exact path and DTO names.
 - [ ] FE `src/api/schema.d.ts` regenerated from the current BE (no hand edits).

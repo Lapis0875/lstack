@@ -30,10 +30,11 @@ user's language.
 
 | Role | Owns | Does not |
 | --- | --- | --- |
-| Orchestrator (you) | scope cut, API contract, screen↔endpoint map, worker briefs, contract changes, final demo path | write feature code, pick libraries inside FE or BE |
+| Orchestrator (you; architect responsibility when using `openai-dev-team`) | scope cut, API contract, mandatory product acceptance scenarios before implementation, screen↔endpoint map, worker briefs, contract changes, final demo path | write feature code, pick libraries inside FE or BE |
 | Backend Implementer | `hackathon-be-spring` tree | touch FE tree, change contract silently |
 | Frontend Implementer | `hackathon-fe-vite` tree | touch BE tree, change contract silently |
-| Reviewer | reads both trees + contract, runs the demo path | edit code |
+| Reviewer | reads both trees + contract + prewritten acceptance specification; checks coverage and execution evidence | edit code or weaken expected outcomes |
+| Tester (when using `openai-dev-team`; otherwise name a verifier explicitly) | executes mandatory product scenarios against a stable slice/candidate and records evidence | write product code or change acceptance expectations |
 
 One writer per tree. Contract changes go through the Orchestrator and are
 broadcast to both implementers and the Reviewer.
@@ -46,7 +47,8 @@ Use a visible timer. If a step overruns, cut scope, not the next step.
 Write `plan/SCOPE.md` from `templates/SCOPE.md`:
 - Must: 3–4 user-visible features maximum for 3 hours. Each is one sentence
   "user can …". Auth is already done; do not list it.
-- Demo path: the exact click sequence shown at the end. Everything not on it is Should/Won't.
+- Give each Must a stable requirement ID (M1, M2, ...).
+- Demo path: the exact click sequence shown at the end. Map it to the Must IDs; optional work is Should/Won't, never silently downgrade a Must.
 - Won't: write it down so nobody builds it.
 
 ### 5–15 min: API contract
@@ -62,17 +64,29 @@ Rules that keep this to 10 minutes:
 - Name the DTO classes; the BE's springdoc output and the FE's generated types must match these names.
 - Fill the contract's `## References` table from each boilerplate's `docs/refs/INDEX.md`: one row per library a Must feature touches (for example Spring Batch for a CSV import, AWS S3 for uploads). Copy the file path and pinned Context7 ID; do not research during the timebox.
 
-### 15–20 min: screen ↔ endpoint map
-Fill the table in `plan/SCOPE.md`: one row per screen (3–5 screens), listing
-the endpoints it calls. A screen with no endpoint or an endpoint with no screen
-is a scope bug; fix it now.
+### 15–20 min: screen map and mandatory product acceptance
+Fill the screen↔endpoint table in `plan/SCOPE.md`. A screen with no endpoint or
+an endpoint with no screen is a scope bug; fix it now.
 
-### 20–27 min: worker briefs
+Before implementation begins, the Orchestrator acting as architect MUST write
+`plan/TEST-PLAN.md` from `templates/TEST-PLAN.md`. In `openai-dev-team`, architect
+is this planning responsibility of the Orchestrator, not an additional model.
+Actual test source code is optional during planning; documented test procedures
+with objective pass/fail outcomes are mandatory.
+
+Each scenario needs a stable ID (AT-01, ...), Must requirement ID, preconditions
+and test data, precise actions, expected observable result and data effects,
+verification method, implementer/executor owners, and required evidence. Cover
+every Must's happy path plus relevant failure, boundary, authorization, and
+persistence checks. Record why a risk category does not apply. Reuse auth checks
+only where changed features depend on them; do not expand product scope.
+
+### 20–27 min: worker briefs and acceptance coverage check
 Fill `templates/BRIEF-backend.md` and `templates/BRIEF-frontend.md` into
-`plan/`. Each brief has `# Target` (repo path, allowed paths, non-goals),
-`# Change` (feature list referencing the contract by endpoint), `# Acceptance`
-(observable checks, commands to run). Reviewer brief = `templates/REVIEW.md`,
-which is mostly the contract turned into a checklist.
+`plan/`. Each brief cites its assigned scenario IDs in `plan/TEST-PLAN.md`.
+Implementers write test code from those prewritten expectations; the Tester
+executes them on the real product. Use `templates/REVIEW.md` to check coverage
+and the resulting evidence, not to invent acceptance criteria after coding.
 
 Do not write implementation steps, folder layouts, or component trees in the
 briefs. Implementers decide those. Briefs do point implementers at
@@ -86,19 +100,26 @@ Dispatch BE and FE in the same batch. First assignment for both is the
 **walking skeleton**: one Must feature end to end (BE endpoint with DB, FE
 screen calling it for real). Reviewer starts when the skeleton lands.
 
+Dispatch is blocked until every Must maps to a mandatory scenario and each
+scenario has concrete steps, expected results, and an execution owner. A passing
+build, mock-only check, or successful happy-path demo is not sufficient for
+completion: all mandatory scenarios need recorded PASS evidence. FAIL, BLOCKED,
+and NOT_RUN are not PASS. Changing scope or expected outcomes requires explicit
+user approval; keep scenario IDs stable and notify the implementers and verifier.
+
 ## 3-hour schedule
 
-| Window | Orchestrator | BE | FE | Reviewer |
+| Window | Orchestrator | BE | FE | Tester / Reviewer |
 | --- | --- | --- | --- | --- |
-| 0:00–0:30 | contract + briefs | boot boilerplate, read contract | boot boilerplate, start MSW mocks from contract | idle |
-| 0:30–1:15 | answer blockers only | skeleton: 1 endpoint + entity + test | skeleton: 1 screen on real API | smoke the skeleton; contract diff |
-| 1:15–2:30 | approve contract changes | remaining Must | remaining Must | per-slice contract check |
-| 2:30–3:00 | lock demo path | bugs only | bugs only | run demo path twice |
+| 0:00–0:30 | contract + prewritten product scenarios + briefs | boot boilerplate, read contract | boot boilerplate, start MSW mocks from contract | read the acceptance specification |
+| 0:30–1:15 | record verification evidence | skeleton: 1 endpoint + entity + tests | skeleton: 1 screen on real API | Tester executes skeleton scenarios; Reviewer audits contract + evidence |
+| 1:15–2:30 | approve contract changes | remaining Must | remaining Must | verify each stable slice against its scenario IDs |
+| 2:30–3:00 | lock candidate and record results | bugs only, then freeze | bugs only, then freeze | execute all mandatory scenarios; review evidence after fixes are stable |
 
 Hard rules:
 1. FE never waits for BE: MSW handlers come straight from the contract. Swap to the real API when the endpoint exists.
 2. Contract change = Orchestrator approval + broadcast. No silent field renames.
-3. Reviewer checks per slice, not once at the end. Checklist = contract.
+3. Reviewer checks each stable slice without overlapping writes to it. Checklist = contract + prewritten product scenarios; Tester executes, Reviewer audits evidence.
 4. At 2:30, stop adding features regardless of state. A working 3-feature demo beats a broken 5-feature one.
 
 ## Artifacts
@@ -107,6 +128,7 @@ Hard rules:
 plan/
   SCOPE.md          # Must / demo path / Won't / screen↔endpoint map
   CONTRACT.md       # endpoints, DTOs, entities, errors
+  TEST-PLAN.md      # prewritten mandatory scenarios, requirement mapping, execution evidence
   BRIEF-backend.md
   BRIEF-frontend.md
   REVIEW.md
@@ -114,6 +136,8 @@ plan/
 
 Keep `plan/` in whichever repo hosts the monorepo or in the BE repo; it is
 read-only for implementers.
+The Orchestrator records execution results from the Tester's report; Tester
+and Reviewer remain read-only. Keep scenario expectations distinct from results.
 
 ## Anti-patterns that cost the hour
 

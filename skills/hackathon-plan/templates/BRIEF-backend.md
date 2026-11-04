@@ -16,6 +16,8 @@ Implement every endpoint and entity in `plan/CONTRACT.md`, in demo-path order:
 - Contract gap or impossibility → message the Orchestrator; do not improvise fields.
 
 # Acceptance
+- Assigned mandatory scenarios: <AT-IDs> in `plan/TEST-PLAN.md`, written before implementation. Implement them and write behavioral tests from their expected outcomes; do not weaken expectations to fit the code.
+- Hand off the scenario IDs and real API/data evidence to the named Tester/verifier. All assigned mandatory scenarios require PASS; blocked or unrun is not done.
 - `./gradlew test` green; one MockMvc test per endpoint asserting status + JSON field names from the contract.
 - `./gradlew bootRun` + `curl` of the demo path pasted in the report.
 - `GET /v3/api-docs` lists every contract DTO by name.

@@ -41,14 +41,20 @@ Orchestrator inline. State why delegation was skipped.
 
 ## 1. Scope and design (Orchestrator)
 
-There is no separate architect role. The Orchestrator does the design work
-read-only before anyone writes:
+There is no separate architect model or worker. The Orchestrator acts as the
+**architect** during planning and owns the mandatory product acceptance test
+specification before implementation is dispatched:
 
-1. State the requested outcome, non-goals, and acceptance criteria.
+1. State the requested outcome, non-goals, and stable requirement IDs.
 2. Read the relevant code and conventions. Reuse existing patterns.
 3. Define the shared contracts between slices: API shapes, schemas, interfaces, file formats. Put them in one file that each brief references.
-4. Split the work into slices with **one writer per path**. Shared interfaces, migrations, generated files, and lockfiles each get exactly one owner. Typical full-stack split: one Backend Implementer and one Frontend Implementer.
-5. For a new project, finish steps 1–4 before creating any project file.
+4. Write mandatory product acceptance scenarios in the implementation plan before coding starts. With `hackathon-plan`, use `plan/TEST-PLAN.md` from its template; otherwise embed the same specification in the plan. Give each scenario a stable ID, linked requirement, preconditions/test data, exact actions, expected observable outcome (including data changes or unchanged state), verification method, implementer/executor owners, and required evidence. Test source code is not required yet. Cover every Must requirement's happy path and relevant boundaries, failures, authorization, and persistence; explain inapplicable risk categories. Generic items such as "tests pass" or "login works" are insufficient.
+5. Split the work into slices with **one writer per path**. Shared interfaces, migrations, generated files, and lockfiles each get exactly one owner. Typical full-stack split: one Backend Implementer and one Frontend Implementer. Assign scenario IDs to briefs; do not dispatch implementation until the acceptance specification covers every Must requirement.
+
+For a new project, finish the read-only design before scaffolding or production
+file writes. Plan artifacts may record that design. Expectations come from the
+user's requirements, not the finished implementation; changing scope or expected
+outcomes requires explicit user approval.
 
 ## 2. Implementation (Implementers)
 
@@ -56,8 +62,8 @@ Every Implementer brief contains:
 - `# Target`: repository and allowed paths, forbidden paths, non-goals.
 - `# Contract`: the shared contract file. The Implementer follows it exactly and messages the Orchestrator instead of deviating.
 - `# Change`: what to build, in priority order.
-- `# Tests`: the tests the Implementer must write for this slice, derived from the acceptance criteria and contract rather than from the implementation. Cover behavior, boundaries, and error cases. Tests ship in the same delivery as the code; a slice without its tests is not done.
-- `# Acceptance`: observable results and the commands that prove them.
+- `# Tests`: the prewritten scenario IDs this slice must satisfy. Write production code and its tests from those expectations, covering behavior, boundaries, and error cases. Planning may be prose-only; the Implementer still owns test-code delivery.
+- `# Acceptance`: link the mandatory product acceptance specification and name the observable checks and commands for the assigned scenario IDs.
 - `# Report`: every changed or created file, the commands run with their real output, and any deviation.
 
 Implementers may run focused builds and tests for their own slice when no
@@ -73,22 +79,25 @@ file changes, the candidate is new.
 
 ## 4. Testing (Tester)
 
-The Orchestrator gives the Tester the candidate identifier, the exact commands
-(build, unit/integration tests, lint, typecheck), and the acceptance scenarios
-(for example, run the server and walk the user flow in a browser or with curl).
+The Orchestrator gives the Tester the candidate identifier, the acceptance
+specification written before implementation, assigned scenario IDs, the exact
+commands (build, unit/integration tests, lint, typecheck), and real product
+scenarios (for example, run the server and walk the flow in a browser or curl).
 
-The Tester runs them directly and reports, per requirement:
-`PASS` / `FAIL` / `BLOCKED`, the command, and the observed output. The Tester
-does not edit source, tests, fixtures, or snapshots. Blocked, unexecuted, or
-inconclusive requirements are not PASS.
+The Tester executes every mandatory scenario unchanged and records its ID,
+`PASS` / `FAIL` / `BLOCKED` / `NOT_RUN`, the observed result, and evidence.
+The Tester does not edit source, expectations, tests, fixtures, or snapshots.
+Build success or mock-only checks do not replace real integration acceptance.
+Blocked, unexecuted, or inconclusive requirements are not PASS.
 
 ## 5. Review (Reviewer)
 
-The Orchestrator gives the Reviewer the original request, the acceptance
-criteria, the contract, the candidate's actual diff (new files included), and
-the Tester's report. A summary alone is not enough. The Reviewer works
-read-only and reports concrete defects with severity, file:line, observed
-behavior, and expected behavior.
+The Orchestrator gives the Reviewer the original request, prewritten acceptance
+specification, contract, candidate's actual diff (new files included), and the
+Tester's per-scenario evidence. The Reviewer checks requirement coverage and
+that expectations were not weakened after implementation. A summary alone is
+not enough. Review is read-only; report concrete defects with severity,
+file:line, observed behavior, and expected behavior.
 
 ## 6. Fix loop
 
