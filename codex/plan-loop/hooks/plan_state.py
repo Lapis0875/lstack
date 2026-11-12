@@ -1,25 +1,22 @@
-"""Shared helpers for the plan-loop Codex hooks: locate and parse the active plan."""
+"""Shared helpers for the plan-loop Codex hooks: a shim over the skill's planlib.
+
+The only plan parser is ``skills/plan-loop/scripts/planlib`` in this checkout (the hook
+commands point at absolute checkout paths, so the skill tree is always beside them).
+This module puts that directory on ``sys.path`` and re-exports what the hooks need.
+
+If planlib cannot be imported the hooks fail open: one line on stderr, ``{}`` on stdout,
+exit 0. A broken skill tree must never stop Codex from running tools or stopping.
+"""
 
 from __future__ import annotations
 
 import json
-import re
 import sys
-from dataclasses import dataclass
 from pathlib import Path
 
-OPEN_TASK = re.compile(r"^\s*- \[ \] (.+)$")
-DONE_TASK = re.compile(r"^\s*- \[x\] ", re.IGNORECASE)
-STATUS = re.compile(r"^status:\s*(\S+)\s*$")
-
-
-@dataclass
-class ActivePlan:
-    root: Path
-    path: Path
-    status: str
-    open_tasks: list[str]
-    done_count: int
+SCRIPTS = Path(__file__).resolve().parents[3] / "skills" / "plan-loop" / "scripts"
+if str(SCRIPTS) not in sys.path:
+    sys.path.insert(0, str(SCRIPTS))
 
 
 def read_event() -> dict:
@@ -29,48 +26,20 @@ def read_event() -> dict:
         return {}
 
 
-def find_active_plan(cwd: str | None) -> ActivePlan | None:
-    """Walk up from cwd to the first directory holding plan/ACTIVE (stop at a .git root)."""
-    if not cwd:
-        return None
-    for directory in [Path(cwd), *Path(cwd).parents]:
-        marker = directory / "plan" / "ACTIVE"
-        if marker.is_file():
-            slug = marker.read_text(encoding="utf-8").strip()
-            plan = directory / "plan" / f"{slug}.md"
-            return parse_plan(directory, plan) if slug and plan.is_file() else None
-        if (directory / ".git").exists():
-            return None
-    return None
-
-
-def parse_plan(root: Path, path: Path) -> ActivePlan:
-    lines = path.read_text(encoding="utf-8").splitlines()
-    status = "unknown"
-    if lines and lines[0].strip() == "---":
-        for line in lines[1:]:
-            if line.strip() == "---":
-                break
-            match = STATUS.match(line)
-            if match:
-                status = match.group(1)
-    open_tasks: list[str] = []
-    done = 0
-    in_tasks = False
-    for line in lines:
-        if line.startswith("## "):
-            in_tasks = line.strip() == "## Tasks"
-            continue
-        if not in_tasks:
-            continue
-        match = OPEN_TASK.match(line)
-        if match:
-            open_tasks.append(match.group(1).strip())
-        elif DONE_TASK.match(line):
-            done += 1
-    return ActivePlan(root=root, path=path, status=status, open_tasks=open_tasks, done_count=done)
-
-
 def emit(payload: dict) -> None:
     sys.stdout.write(json.dumps(payload))
     sys.stdout.write("\n")
+
+
+try:
+    from planlib.guards import decide_stop, decide_tool
+    from planlib.planfile import Plan, find_active_plan, parse_plan
+except Exception as exc:  # ImportError, or a SyntaxError from an interpreter too old for planlib
+    detail = " ".join(f"{type(exc).__name__}: {exc}".split())
+    sys.stderr.write(f"plan-loop: hook disabled, cannot import planlib from {SCRIPTS} ({detail})\n")
+    emit({})
+    sys.exit(0)
+
+ActivePlan = Plan
+
+__all__ = ["ActivePlan", "Plan", "decide_stop", "decide_tool", "emit", "find_active_plan", "parse_plan", "read_event"]
