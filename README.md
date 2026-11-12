@@ -4,6 +4,8 @@ Lapis0875의 에이전트 스킬 스택. omp에서 쓰던 스킬셋을 Codex 등
 
 - `skills/` — 직접 작성한 스킬 (이 저장소에 포함)
 - `codex/` — Codex 전용 보조 자산 (hook 등). 스킬과 달리 `npx skills add`로 설치되지 않는다
+- `omp/` — omp 전용 보조 자산 (extension, 설치 스크립트). `codex/`와 마찬가지로 `npx skills add`로 설치되지 않는다
+- `tests/` — 스킬 스크립트, Codex hook, omp extension의 테스트
 - `profiles/` — 외부 스킬용 개인 설정 (예: `diagram-design` 스타일 프로필). 스킬 본문은 포함하지 않는다
 - 아래 **외부 스킬** 표 — 서드파티 스킬의 출처와 설치 명령 (본문은 각 원저장소에서 받는다)
 
@@ -28,6 +30,15 @@ ln -s "$PWD/lstack/skills/"* ~/.agents/skills/
 python3 codex/plan-loop/install.py          # 변경 예정 내용만 출력
 python3 codex/plan-loop/install.py --apply  # ~/.codex/hooks.json 백업 후 핸들러 추가
 ```
+
+omp에서는 `plan-loop` extension(계획 단계 쓰기 가드, 미완료 시 종료 차단, `plan_loop` 도구, `/plan-loop` 명령)을 선택으로 설치한다. 스킬 링크도 함께 만든다:
+
+```bash
+python3 omp/plan-loop/install.py          # 변경 예정 내용만 출력
+python3 omp/plan-loop/install.py --apply  # ~/.omp/agent/extensions/plan-loop, ~/.omp/agent/skills/plan-loop 링크 생성 후 omp 재시작
+```
+
+hook이나 extension을 쓰면 `plan-loop`을 복사(`npx skills add`)가 아니라 위 스크립트의 심볼릭 링크로 설치한다. hook과 extension은 체크아웃의 `skills/plan-loop/scripts/`를 쓰므로 복사본과 버전이 어긋날 수 있다. 가드는 보조 장치이고 샌드박스가 아니다. 인터프리터나 빌드 도구를 거친 쓰기, omp `eval`, MCP 도구, 다른 extension의 도구는 막지 않는다.
 
 ### 2. 외부 스킬
 
@@ -67,7 +78,7 @@ echo "profile: ax-study" > <project-root>/.diagram-design   # 또는 nypc
 | `idea-validation` | 프로젝트·캡스톤 아이디어 검증: grill 질문, 시장·경쟁 조사, MVP 범위, 레드팀 | `grilling` |
 | `hackathon-plan` | 문제가 정해진 해커톤에서 30분 안에 API 계약·필수 인수 시나리오(`TEST-PLAN.md`)·워커 브리프를 작성. 설계 단계에서 요구사항별 사전조건·실행 절차·기대 결과를 고정하고 Implementer→Tester→Reviewer가 같은 기준으로 구현·실행·검토. `hackathon-be-spring`·`hackathon-fe-vite` 보일러플레이트 전제 | — |
 | `openai-dev-team` | OpenAI 모델만 쓰는 에이전트 개발 팀: Orchestrator(GPT-6 Astra, 대체 Sol high; architect 역할로 구현 전 필수 인수 시나리오 작성)·Implementer(GPT-6.1 Terra, 대체 Sol medium; 테스트 코드 작성)·Reviewer(GPT-6.1 Sol high)·Tester(GPT-6 Luna medium; 시나리오별 실행 증거 기록) | — |
-| `plan-loop` | omp의 plan mode·todo·goal 루프를 옮긴 계획→실행 하네스. `plan` 모드는 읽기 전용 조사 후 `plan/<slug>.md`를 쓰고 승인을 기다리며, References 칸은 저장소의 Context7 참조 팩(`docs/refs/`)에서 버전이 맞는 문서를 고정한다. `run` 모드는 작업별 검증·증거 기록과 최종 스모크까지 이어서 실행. Codex hook 선택 설치(`codex/plan-loop/`) | — |
+| `plan-loop` | omp의 plan mode·todo·goal 루프를 옮긴 계획→실행 하네스. `plan` 모드는 읽기 전용 조사 후 `plan/<slug>.md`에 요청 원문, 요구사항, 필수 인수 시나리오를 쓰고, References 칸은 저장소의 Context7 참조 팩(`docs/refs/`)에서 버전이 맞는 문서를 고정한다. 승인 전에 독립 검토(차단 자격 B1~B6, 최대 3라운드)를 거친다. dev-team 워크플로우에서는 담당과 쓰기 범위가 붙은 노드를 wave로 나눈 DAG가 되고, 요청하면 노드 브리프와 JSON 상태 기록(`plan/<slug>.state.json`)이 붙는다. `run` 모드는 작업별 검증·증거 기록, 시나리오 실행 기록, 최종 스모크까지 이어서 실행. 계획 검사와 기록은 `scripts/plan_loop.py`(Python 3.9+, 표준 라이브러리)가 맡는다. Codex hook(`codex/plan-loop/`)과 omp extension(`omp/plan-loop/`) 선택 설치 | python3 (없으면 수동 점검표) |
 
 ## 외부 스킬
 
